@@ -1,29 +1,34 @@
 package practice.coffeemachine
 
+import kotlin.math.min
+
 fun main(){
-    print("""
-        
-        Starting to make a coffee in NIX office
-        Grinding coffee beans
-        Boiling water
-        Mixing boiled water with crushed coffee beans
-        Pouring coffee into the cup
-        Pouring some milk into the cup
-        Coffee is ready! Go to work!
-        
-    """.trimIndent())
+
+    println("Write how many ml of water the coffee machine has:")
+    print("> ")
+    val water = readln().toInt()
+
+    println("Write how many ml of milk the coffee machine has:")
+    print("> ")
+    val milk = readln().toInt()
+
+    println("Write how many grams of coffee beans the coffee machine has:")
+    print("> ")
+    val coffee = readln().toInt()
 
     println("Write how many cups of coffee you will need:")
     print("> ")
-    val cups = readln().toInt() ?:0
-    val water = 0
-    val milk = 0
-    val coffee = 0
+    val cups = readln().toInt()
 
-    println("""
-        For $cups cups of coffee you will need:
-        ${200 * cups} ml of water
-        ${50 * cups} ml of milk
-        ${15 * cups} g of coffee beans
-        """.trimIndent())
+    val cupsPossible = minOf(water / 200, milk / 50, coffee / 15)
+
+    if (cupsPossible >= cups) {
+        if (cupsPossible == cups) {
+            println("Yes, I can make that amount of coffee")
+        } else {
+            print("Yes, I can make that amount of coffee (and even ${cupsPossible - cups} more than that)")
+        }
+    } else {
+        println("No, I can make only $cupsPossible cups of coffee")
+    }
 }
