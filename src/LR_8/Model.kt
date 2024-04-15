@@ -1,14 +1,17 @@
+// Клас, який представляє ресурси кавоварки
 data class Resources(
-    val water: Int = 0,
-    val milk: Int = 0,
-    val coffeeBeans: Int = 0,
-    val disposableCups: Int = 0,
-    val money: Int = 0
+    val water: Int = 0,               // кількість води
+    val milk: Int = 0,                // кількість молока
+    val coffeeBeans: Int = 0,         // кількість кавових зерен
+    val disposableCups: Int = 0,     // кількість одноразових стаканчиків
+    val money: Int = 0                // кількість грошей
 
 )
 
+// Клас, який реалізує функціонал кавоварки
 class CoffeeMachine(private var resources: Resources) {
 
+    // Функція для відображення залишкових ресурсів
     fun remaining(): String {
         return """
             The coffee machine has:
@@ -20,6 +23,7 @@ class CoffeeMachine(private var resources: Resources) {
         """.trimIndent()
     }
 
+    // Функція для приготування (покупки) кави
     fun buy(type: String): String {
         var notEnough = ""
         when (type) {
@@ -78,6 +82,7 @@ class CoffeeMachine(private var resources: Resources) {
         return "Sorry, not enough ${notEnough.dropLast(2)}!"
     }
 
+    // Функція для поповнення ресурсів
     fun fill(addResources: Resources) {
         resources = Resources(
             resources.water + addResources.water,
@@ -87,6 +92,7 @@ class CoffeeMachine(private var resources: Resources) {
         )
     }
 
+    // Функція для вилучення грошей
     fun take(): String {
         val moneyTaken = resources.money
         val updatedResources = resources.copy(money = 0)
